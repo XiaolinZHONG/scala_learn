@@ -1,5 +1,4 @@
-import org.apache.spark.sql.SparkSession
-import org.apache.spark.sql.SQLContext
+import org.apache.spark.sql.{DataFrame, SQLContext, SparkSession}
 import org.apache.spark.{SparkConf, SparkContext}
 
 /**
