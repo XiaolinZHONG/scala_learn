@@ -10,32 +10,49 @@ object BPNeturalNetworks {
 
   var sizes: Array[Int] = null
   // 网络结构
-  var numLayers: Int = sizes.length
+  //  var numLayers: Int = sizes.length
   // 网络层次
-  var epochs: Int = null
-  // 循环次数
-  var miniBatchSize: Int = null
-  // 小批量的大小
-  var eta: Int = null
-  // 步长
-  var biases = ArrayBuffer()
+
+  var biases :ArrayBuffer[Array[Array[Double]]] = null
+  // bias 动态录入
 
 
-  for (i <- 1 until sizes.length) {
-    var matrix = Array.ofDim[Double](sizes(i), 1)
-    for (j <- 0 to sizes(i)) {
-      matrix(j)(1) = math.random
+  var weights :ArrayBuffer[Array[Array[Double]]]=null
+  // weights 动态录入
+
+
+  def initNetworks()={
+
+    for (i <- 1 until sizes.length) {
+      var tempMatrix = ofDim[Double](sizes(i), 1)
+      for (j <- 0 until sizes(i)) {
+        tempMatrix(j)(0) = math.random;
+      }
+      biases += tempMatrix;
     }
-    biases
-  }
 
-
-  /**
-    * 前馈函数
-    *
-    * @param dataFrame
-    */
-  def feedForward(dataFrame: DataFrame) = {
+    for (x <- 1 until sizes.length; y <- 0 until sizes.length - 1) {
+      var tempMatrix = ofDim[Double](sizes(x), sizes(y))
+      for (i <- 0 until sizes(x); j <- 0 until sizes(y)) {
+        tempMatrix(i)(j) = math.random;
+      }
+      weights += tempMatrix
+    }
 
   }
+  def feedForward(z:DataFrame)={
+    for (b<-biases;w<-weights){
+
+    }
+  }
+
+  def main(args: Array[String]) {
+
+    sizes = Array(3, 3, 2, 1)
+    val epochs =10
+    val miniBatchSize=10
+    val eta=0.1
+
+  }
+
 }
